@@ -1,6 +1,5 @@
 import numpy as np
 from numba import njit
-from datetime import datetime
 
 @njit
 def BubbleSort(arr: np.ndarray, /) -> np.ndarray:
@@ -16,9 +15,16 @@ def BubbleSort(arr: np.ndarray, /) -> np.ndarray:
             break
     return arr
 
-arr = np.random.randint(0, 10000, size=20_000)
-print(arr)
-start = datetime.now()
-print(BubbleSort(arr))
-ended = datetime.now()
-print(ended - start)
+
+@njit
+def SelectionSort(arr: np.ndarray, /) -> np.ndarray:
+
+    n = arr.shape[0]
+    for i in range(n - 1, -1, -1):
+        max_index = i
+        for j in range(i, -1, -1):
+            if arr[j] > arr[max_index]:
+                max_index = j
+        if max_index != i:
+            arr[max_index], arr[i] = arr[i], arr[max_index]
+    return arr
