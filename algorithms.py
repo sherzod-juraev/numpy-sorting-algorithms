@@ -6,12 +6,12 @@ def BubbleSort(arr: np.ndarray, /) -> np.ndarray:
 
     n = arr.shape[0]
     for i in range(n):
-        fiting = False
+        swapped = False
         for j in range(0, n - i - 1):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                fiting = True
-        if not fiting:
+                swapped = True
+        if not swapped:
             break
     return arr
 
@@ -27,4 +27,17 @@ def SelectionSort(arr: np.ndarray, /) -> np.ndarray:
                 max_index = j
         if max_index != i:
             arr[max_index], arr[i] = arr[i], arr[max_index]
+    return arr
+
+
+@njit
+def InsertionSort(arr: np.ndarray, /) -> np.ndarray:
+
+    n = arr.shape[0]
+    for i in range(1, n):
+        min_value, j = arr[i], i
+        while j >= 1 and arr[j - 1] > min_value:
+            arr[j] = arr[j - 1]
+            j -= 1
+        arr[j] = min_value
     return arr
