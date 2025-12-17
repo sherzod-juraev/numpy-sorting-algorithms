@@ -24,7 +24,3 @@ def RadixSortLSD(arr: np.ndarray, /) -> np.ndarray:
             arr[o] = auxiliary[o]
         exp *= 10
     return arr
-
-
-arr = np.random.randint(1, 99, 30)
-print(RadixSortLSD(arr))
